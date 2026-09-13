@@ -2,43 +2,23 @@
 <html lang="tr">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glif Atölyesi · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
 <body>
-<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakterler</a><a href="esya-glif.html">Eşya & Focus</a><a class="active" href="glif-atolyesi.html">Glif Atölyesi</a><a href="envanter.html">Envanter</a><button id="logout">Çıkış</button></nav></div></header>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakter Oluştur</a><a href="hazir-karakterler.html">Hazır Karakterler</a><a href="esya-glif.html">Eşya</a><a class="active" href="glif-atolyesi.html">Glif Atölyesi</a><a href="envanter.html">Envanter</a><button id="logout">Çıkış</button></nav></div></header>
 <main class="shell page compact-page">
-<section class="page-head compact-head"><p class="eyebrow">GM · GLİF ATÖLYESİ</p><h1>Glif Atölyesi</h1><p>Kök, Kombine ve Özel Glifleri burada oluşturup doğrudan seçili oyuncuya ver.</p><div id="statusMessage" class="status">Hazırlanıyor...</div></section>
-
-<section class="panel compact-panel"><div class="form-grid"><div class="field"><label>KARAKTER</label><select id="characterSelect"><option>Karakterler yükleniyor...</option></select></div><div class="field"><label>GLİF DURUMU</label><input id="glyphStatus" value="—" disabled></div></div></section>
-
+<section class="page-head compact-head"><p class="eyebrow">GM · GLİF ATÖLYESİ</p><h1>Glif Atölyesi</h1><p>Kök, Kombine ve Özel Glifleri oluşturup doğrudan seçili oyuncuya ver.</p><div id="statusMessage" class="status">Hazır.</div></section>
+<section class="panel compact-panel"><div class="form-grid"><div class="field"><label>KARAKTER</label><select id="characterSelect"><option>Karakterler yükleniyor...</option></select></div><div class="field"><label>BİLİNEN GLİF</label><input id="glyphStatus" value="—" disabled></div></div></section>
 <div class="workbench-grid">
   <section class="panel compact-panel">
     <div class="section-heading"><div><p class="eyebrow">OLUŞTUR</p><h2>Glif Ver</h2></div></div>
     <div class="glyph-mode-tabs"><button class="glyph-mode active" type="button" data-glyph-mode="root">Kök</button><button class="glyph-mode" type="button" data-glyph-mode="combine">Kombine</button><button class="glyph-mode" type="button" data-glyph-mode="custom">Özel</button></div>
-
-    <div id="glyphRootFields" class="glyph-fields">
-      <div class="field"><label>KÖK GLİF</label><select id="glyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div>
-    </div>
-
-    <div id="glyphCombineFields" class="glyph-fields" hidden>
-      <div class="form-grid"><div class="field"><label>1. KÖK</label><select id="glyphRootA"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div><div class="field"><label>2. KÖK</label><select id="glyphRootB"><option>Rüzgâr</option><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Taş</option></select></div></div>
-      <div class="field"><label>KOMBİNE GLİF ADI</label><input id="glyphCombineName" placeholder="Otomatik gelir; istersen değiştir"></div>
-      <div id="glyphCombineHint" class="status compact-status">Kanonik birleşim burada görünür.</div>
-    </div>
-
+    <div id="glyphRootFields" class="glyph-fields"><div class="field"><label>KÖK GLİF</label><select id="glyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div></div>
+    <div id="glyphCombineFields" class="glyph-fields" hidden><div class="form-grid"><div class="field"><label>1. KÖK</label><select id="glyphRootA"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div><div class="field"><label>2. KÖK</label><select id="glyphRootB"><option>Rüzgâr</option><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Taş</option></select></div></div><div class="field"><label>KOMBİNE GLİF ADI</label><input id="glyphCombineName" placeholder="Otomatik gelir; istersen değiştir"></div><div id="glyphCombineHint" class="status compact-status">Kanonik birleşim burada görünür.</div></div>
     <div id="glyphCustomFields" class="glyph-fields" hidden><div class="field"><label>ÖZEL GLİF ADI</label><input id="glyphCustomName" placeholder="Örn. Kara Güneş Mührü"></div></div>
-
     <div class="field"><label>OYUNCU AÇIKLAMASI / ETKİ</label><textarea id="glyphNote" class="short-textarea" placeholder="Glifin etkisi, kullanım şartı veya kısa not"></textarea></div>
     <div class="actions"><button class="btn" id="giveGlyph">Glifi Oyuncuya Ver</button></div>
   </section>
-
   <section class="panel compact-panel">
-    <p class="eyebrow">HAZIR GLİF</p><h2>Kapasite & Hazır Sayı</h2>
-    <div class="form-grid"><div class="field"><label>HAZIR GLİF</label><input id="preparedCurrent" type="number" min="0" value="0"></div><div class="field"><label>MAKS. KAPASİTE</label><input id="preparedMax" type="number" min="0" value="0"></div></div>
-    <div class="actions"><button class="btn secondary" id="saveCapacity">Hazır Glifi Güncelle</button></div>
-    <div class="status compact-status">Oyuncu ekranında <strong id="capacityPreview">0 / 0</strong> olarak görünür.</div>
-  </section>
-
-  <section class="panel compact-panel span-2">
     <div class="section-heading"><div><p class="eyebrow">BİLİNEN GLİFLER</p><h2>Oyuncudaki Glifler</h2></div><span class="pill" id="glyphCount">0 Glif</span></div>
-    <div id="glyphList" class="scroll-list"><div class="placeholder">Karakter seç.</div></div>
+    <div id="glyphList" class="scroll-list tall-list"><div class="placeholder">Karakter seç.</div></div>
   </section>
 </div>
 </main>
