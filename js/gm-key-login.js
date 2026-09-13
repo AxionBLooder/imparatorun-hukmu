@@ -1,4 +1,4 @@
-import {captureKey,verifyKey,clearKey} from './gm-key-client.js';
+import {captureKey,verifyKey} from './gm-key-client.js';
 
 const status=document.querySelector('#statusMessage');
 const openBtn=document.querySelector('#openSavedGm');
@@ -6,11 +6,11 @@ const say=t=>{if(status)status.textContent=t};
 
 async function enter(){
   const key=captureKey();
-  if(!key){say('GM paneli artık e-posta veya şifre istemez. Sana özel GM bağlantısını açman yeterli.');return}
-  say('Özel GM anahtarı doğrulanıyor...');
+  if(!key){say('Bu cihazda GM erişimi bulunamadı.');return}
+  say('Erişim kontrol ediliyor...');
   try{
     if(await verifyKey())location.replace('karakterler.html');
-    else say('Kayıtlı GM anahtarı geçersiz. Yeni özel GM bağlantısını kullan.');
+    else say('GM erişimi geçersiz veya yenilenmiş.');
   }catch(e){say('Bağlantı hatası: '+e.message)}
 }
 
