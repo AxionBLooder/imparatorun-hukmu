@@ -10,11 +10,10 @@
     <h2>Kimlik</h2>
     <div class="form-grid">
       <div class="field"><label>OYUNCU ADI</label><input id="playerName" placeholder="Oyuncunun adı"></div>
-      <div class="field"><label>OYUNCU E-POSTASI</label><input id="playerEmail" type="email" placeholder="Davet için e-posta"></div>
       <div class="field"><label>KARAKTER ADI</label><input id="characterName" placeholder="Karakterin adı"></div>
       <div class="field"><label>IRK</label><select id="race"><option>İnsan</option><option>Hexborn</option><option>Wildblood</option><option>Graven</option><option>Veyl</option><option>Gloamling</option></select></div>
       <div class="field"><label>IRKSAL SEÇİM</label><select id="raceSpecial"></select></div>
-      <div class="field"><label>KONSEPT</label><input id="concept" placeholder="Avcı, araştırmacı, şifacı..."></div>
+      <div class="field" style="grid-column:1/-1"><label>KONSEPT</label><input id="concept" placeholder="Avcı, araştırmacı, şifacı..."></div>
     </div>
   </section>
 
@@ -41,8 +40,15 @@
   </section>
 
   <section class="panel">
+    <h2>Oyuncu Daveti</h2>
+    <p>E-posta gerekmez. Karakteri seç, davet bağlantısını oluştur ve oyuncuya Discord/WhatsApp üzerinden gönder.</p>
+    <div class="field"><label>AKTİF DAVET BAĞLANTISI</label><input id="inviteLink" readonly placeholder="Henüz bağlantı oluşturulmadı"></div>
+    <div class="actions"><button class="btn" id="invitePlayer">Davet Linki Oluştur</button><button class="btn secondary" id="copyInvite">Linki Kopyala</button><button class="btn secondary" id="revokePlayer">Oyuncu Erişimini Kaldır</button></div>
+  </section>
+
+  <section class="panel">
     <h2>İşlemler</h2>
-    <div class="actions"><button class="btn" id="createCharacter">Yeni Karakter Oluştur</button><button class="btn secondary" id="updateCharacter">Seçili Karakteri Güncelle</button><button class="btn secondary" id="invitePlayer">Oyuncuya Davet Gönder</button><button class="btn danger" id="deleteCharacter">Seçili Karakteri Sil</button></div>
+    <div class="actions"><button class="btn" id="createCharacter">Yeni Karakter Oluştur</button><button class="btn secondary" id="updateCharacter">Seçili Karakteri Güncelle</button><button class="btn danger" id="deleteCharacter">Seçili Karakteri Sil</button></div>
   </section>
 
   <section class="panel">
