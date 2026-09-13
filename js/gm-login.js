@@ -18,10 +18,27 @@ const waitDb=()=>new Promise((resolve,reject)=>{if(window.IH?.db)return resolve(
     return p?.role==='gm';
   }
 
-  if(await isGm()){
-    setupPanel.hidden=false;
-    say('GM oturumu açık. Şifreni belirleyebilir veya panele girebilirsin.');
+  async function refreshUi(){
+    if(await isGm()){
+      setupPanel.hidden=false;
+      say('GM oturumu açık. Şifreni belirleyebilir veya panele girebilirsin.');
+      return true;
+    }
+    return false;
   }
+
+  const params=new URLSearchParams(location.search);
+  const hashParams=new URLSearchParams(location.hash.replace(/^#/,''));
+  const authError=params.get('error_description')||hashParams.get('error_description');
+  if(authError)say('Bağlantı hatası: '+authError);
+
+  await refreshUi();
+
+  db.auth.onAuthStateChange(async(event)=>{
+    if(event==='SIGNED_IN'||event==='TOKEN_REFRESHED'||event==='USER_UPDATED'){
+      await refreshUi();
+    }
+  });
 
   loginForm.addEventListener('submit',async e=>{
     e.preventDefault();
@@ -38,7 +55,7 @@ const waitDb=()=>new Promise((resolve,reject)=>{if(window.IH?.db)return resolve(
     magicBtn.disabled=true;
     say('Giriş bağlantısı gönderiliyor...');
     const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:new URL('giris.html',location.href).href,shouldCreateUser:false}});
-    say(error?('Hata: '+error.message):'Giriş bağlantısı gönderildi. Açtıktan sonra bu sayfadan şifreni belirle.');
+    say(error?('Hata: '+error.message):'Giriş bağlantısı gönderildi. En yeni bağlantıyı bu siteyi kullandığın aynı tarayıcıda aç.');
     magicBtn.disabled=false;
   });
 
