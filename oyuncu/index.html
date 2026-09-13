@@ -1,64 +1,27 @@
 <!doctype html>
 <html lang="tr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Oyuncu Karakter Kağıdı · İmparatorun Hükmü</title>
-  <link rel="stylesheet" href="../assets/style.css" />
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Oyuncu Karakter Kağıdı · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
 <body>
-<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a class="active" href="index.html">Karakter Kağıdı</a></nav></div></header>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a class="active" href="index.html">Karakter Kağıdı</a><button id="logout">Çıkış</button></nav></div></header>
 <main class="shell page">
-  <section class="page-head"><p class="eyebrow">OYUNCU BÖLÜMÜ</p><h1>Karakter Kağıdı</h1><p>Bu sayfa yalnızca giriş yapan oyuncunun kendi karakterini, yeteneklerini ve canlı kaynaklarını gösterecek. GM bilgileri burada yer almayacak.</p></section>
+<section class="page-head"><p class="eyebrow">OYUNCU BÖLÜMÜ</p><h1>Karakter Kağıdı</h1><p>Sadece kendi karakterin, yeteneklerin ve canlı kaynakların burada görünür.</p><div id="statusMessage" class="status">Canlı bağlantı hazırlanıyor...</div></section>
 
-  <section class="panel" id="identityPanel">
-    <h2>Karakter</h2>
-    <div class="form-grid">
-      <div><span class="pill">Karakter Adı</span><h3 id="characterName">Bağlantı bekleniyor</h3></div>
-      <div><span class="pill">Irk</span><h3 id="characterRace">—</h3></div>
-      <div><span class="pill">Oyuncu</span><h3 id="playerName">—</h3></div>
-      <div><span class="pill">Konsept</span><h3 id="characterConcept">—</h3></div>
-    </div>
-  </section>
+<section id="loginPanel" class="panel" hidden><h2>Karakterine Gir</h2><p>GM’nin davet gönderdiği e-posta adresini kullan. Yeni hesap açılmaz; yalnızca davetli oyuncular giriş yapabilir.</p><form id="loginForm"><div class="field"><label>E-POSTA</label><input id="loginEmail" type="email" required placeholder="Davet aldığın e-posta"></div><div class="actions"><button class="btn" type="submit">Giriş Bağlantısı Gönder</button></div></form></section>
 
-  <section class="panel">
-    <h2>Yeterlilikler</h2>
-    <div class="stat-grid">
-      <div class="stat"><strong>BEDEN</strong><span id="statBody">0</span></div>
-      <div class="stat"><strong>ÇEVİKLİK</strong><span id="statAgility">0</span></div>
-      <div class="stat"><strong>ZİHİN</strong><span id="statMind">0</span></div>
-      <div class="stat"><strong>İRADE</strong><span id="statWill">0</span></div>
-      <div class="stat"><strong>ETKİ</strong><span id="statImpact">0</span></div>
-    </div>
-  </section>
+<div id="playerApp" hidden>
+<section class="panel"><h2>Karakter</h2><div class="form-grid"><div><span class="pill">Karakter Adı</span><h3 id="characterName">—</h3></div><div><span class="pill">Irk</span><h3 id="characterRace">—</h3></div><div><span class="pill">Oyuncu</span><h3 id="playerName">—</h3></div><div><span class="pill">Konsept</span><h3 id="characterConcept">—</h3></div></div></section>
 
-  <section class="panel">
-    <h2>Focus & Durum</h2>
-    <div class="resource-row"><strong>Focus</strong><span id="focusValue">0 / 0</span><button class="btn secondary" id="useFocus">1 Focus Kullan</button></div>
-    <div class="resource-row"><strong>Yara Durumu</strong><span id="woundState">Sağlam</span><span class="pill">Canlı</span></div>
-  </section>
+<section class="panel"><h2>Yeterlilikler</h2><div class="stat-grid"><div class="stat"><strong>BEDEN</strong><span id="statBody">0</span></div><div class="stat"><strong>ÇEVİKLİK</strong><span id="statAgility">0</span></div><div class="stat"><strong>ZİHİN</strong><span id="statMind">0</span></div><div class="stat"><strong>İRADE</strong><span id="statWill">0</span></div><div class="stat"><strong>ETKİ</strong><span id="statImpact">0</span></div></div></section>
 
-  <section class="panel">
-    <h2>Bilinen Glifler</h2>
-    <div id="knownGlyphs" class="placeholder">Henüz Glif verisi yok.</div>
-  </section>
+<section class="panel"><h2>Uzmanlık & Irksal Özellik</h2><div class="resource-row"><strong>Uzmanlıklar</strong><span id="skills">—</span></div><div class="resource-row"><strong>Irksal Seçim</strong><span id="raceChoice">—</span></div></section>
 
-  <section class="panel">
-    <h2>Hazır Glifler</h2>
-    <div class="resource-row"><strong>Hazır / Maksimum</strong><span id="glyphCapacityValue">0 / 0</span><span class="pill">Kapasite</span></div>
-    <div id="preparedGlyphs" class="placeholder">Hazırlanmış Glif bulunmuyor.</div>
-  </section>
+<section class="panel"><h2>Canlı Kaynaklar</h2><div class="resource-row"><strong>Focus</strong><div class="counter"><button id="focusMinus">−</button><b id="focusValue">0 / 0</b><button id="focusPlus">+</button></div><span class="pill">Canlı</span></div><div class="resource-row"><strong>Hazır Glif</strong><div class="counter"><button id="glyphMinus">−</button><b id="glyphCapacityValue">0 / 0</b><button id="glyphPlus">+</button></div><span class="pill">Kapasite</span></div><div class="resource-row"><strong>Yara Durumu</strong><div class="counter"><button id="woundMinus">−</button><b id="woundState">Sağlam</b><button id="woundPlus">+</button></div><span class="pill">Durum</span></div></section>
 
-  <section class="panel">
-    <h2>Envanter</h2>
-    <div id="inventory" class="placeholder">Henüz eşya bulunmuyor.</div>
-  </section>
-
-  <section class="panel">
-    <h2>Yetenekler</h2>
-    <div id="abilities" class="placeholder">Irka ve karakter seçimlerine göre yetenekler burada görünecek.</div>
-  </section>
+<section class="panel"><h2>Bilinen Glifler</h2><div id="knownGlyphs"><div class="placeholder">Henüz Glif yok.</div></div></section>
+<section class="panel"><h2>Envanter</h2><p>Tüketilebilir eşyalarını kullandığında `−`, geri kazandığında `+` ile takip edebilirsin. Maksimum adedi aşamazsın.</p><div id="inventory"><div class="placeholder">Envanter boş.</div></div></section>
+<section class="panel"><h2>Karakter Notu</h2><div id="playerNotes" class="placeholder">—</div></section>
+</div>
 </main>
+<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/client-bootstrap"></script>
 <script type="module" src="../js/player-sheet.js"></script>
-</body>
-</html>
+</body></html>
