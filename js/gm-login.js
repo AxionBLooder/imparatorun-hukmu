@@ -10,6 +10,7 @@ const waitDb=()=>new Promise((resolve,reject)=>{if(window.IH?.db)return resolve(
   const setupForm=document.querySelector('#passwordSetupForm');
   const goPanel=document.querySelector('#goPanel');
   const say=t=>{if(status)status.textContent=t};
+  const GM_REDIRECT='https://axionblooder.github.io/imparatorun-hukmu/gm/giris.html';
 
   async function isGm(){
     const {data:{session}}=await db.auth.getSession();
@@ -54,7 +55,7 @@ const waitDb=()=>new Promise((resolve,reject)=>{if(window.IH?.db)return resolve(
   magicBtn.addEventListener('click',async()=>{
     magicBtn.disabled=true;
     say('Giriş bağlantısı gönderiliyor...');
-    const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:new URL('giris.html',location.href).href,shouldCreateUser:false}});
+    const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:GM_REDIRECT,shouldCreateUser:false}});
     say(error?('Hata: '+error.message):'Giriş bağlantısı gönderildi. En yeni bağlantıyı bu siteyi kullandığın aynı tarayıcıda aç.');
     magicBtn.disabled=false;
   });
