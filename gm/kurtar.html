@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GM Oturum Kurtarma · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<main class="shell landing">
+  <section class="hero-card" style="max-width:760px;margin:auto">
+    <p class="eyebrow">GM OTURUM KURTARMA</p>
+    <h1 style="font-size:46px">Localhost Bağlantısını Kurtar</h1>
+    <p class="lead">Giriş mailindeki bağlantı localhost sayfasına düştüyse, tarayıcının adres çubuğundaki tam adresi aşağıya yapıştır. Adres yalnızca bu tarayıcıda işlenir; sunucuya kaydedilmez.</p>
+    <form id="recoverForm">
+      <div class="field"><label>LOCALHOST ADRESİ</label><textarea id="brokenUrl" rows="6" autocomplete="off" spellcheck="false" placeholder="http://localhost:3000/#access_token=..."></textarea></div>
+      <div class="actions"><button class="btn" type="submit">GM Oturumunu Kurtar</button><a class="btn secondary" href="giris.html">Girişe Dön</a></div>
+    </form>
+    <div id="statusMessage" class="status">Token veya localhost adresini sohbete göndermene gerek yok.</div>
+  </section>
+</main>
+<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/client-bootstrap"></script>
+<script type="module" src="../js/gm-recover.js"></script>
+</body></html>
