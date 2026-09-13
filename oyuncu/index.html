@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oyuncu Karakter Kağıdı · İmparatorun Hükmü</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a class="active" href="index.html">Karakter Kağıdı</a></nav></div></header>
+<main class="shell page">
+  <section class="page-head"><p class="eyebrow">OYUNCU BÖLÜMÜ</p><h1>Karakter Kağıdı</h1><p>Bu sayfa yalnızca giriş yapan oyuncunun kendi karakterini, yeteneklerini ve canlı kaynaklarını gösterecek. GM bilgileri burada yer almayacak.</p></section>
+
+  <section class="panel" id="identityPanel">
+    <h2>Karakter</h2>
+    <div class="form-grid">
+      <div><span class="pill">Karakter Adı</span><h3 id="characterName">Bağlantı bekleniyor</h3></div>
+      <div><span class="pill">Irk</span><h3 id="characterRace">—</h3></div>
+      <div><span class="pill">Oyuncu</span><h3 id="playerName">—</h3></div>
+      <div><span class="pill">Konsept</span><h3 id="characterConcept">—</h3></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Yeterlilikler</h2>
+    <div class="stat-grid">
+      <div class="stat"><strong>BEDEN</strong><span id="statBody">0</span></div>
+      <div class="stat"><strong>ÇEVİKLİK</strong><span id="statAgility">0</span></div>
+      <div class="stat"><strong>ZİHİN</strong><span id="statMind">0</span></div>
+      <div class="stat"><strong>İRADE</strong><span id="statWill">0</span></div>
+      <div class="stat"><strong>ETKİ</strong><span id="statImpact">0</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Focus & Durum</h2>
+    <div class="resource-row"><strong>Focus</strong><span id="focusValue">0 / 0</span><button class="btn secondary" id="useFocus">1 Focus Kullan</button></div>
+    <div class="resource-row"><strong>Yara Durumu</strong><span id="woundState">Sağlam</span><span class="pill">Canlı</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>Bilinen Glifler</h2>
+    <div id="knownGlyphs" class="placeholder">Henüz Glif verisi yok.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Hazır Glifler</h2>
+    <div class="resource-row"><strong>Hazır / Maksimum</strong><span id="glyphCapacityValue">0 / 0</span><span class="pill">Kapasite</span></div>
+    <div id="preparedGlyphs" class="placeholder">Hazırlanmış Glif bulunmuyor.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Envanter</h2>
+    <div id="inventory" class="placeholder">Henüz eşya bulunmuyor.</div>
+  </section>
+
+  <section class="panel">
+    <h2>Yetenekler</h2>
+    <div id="abilities" class="placeholder">Irka ve karakter seçimlerine göre yetenekler burada görünecek.</div>
+  </section>
+</main>
+<script type="module" src="../js/player-sheet.js"></script>
+</body>
+</html>
