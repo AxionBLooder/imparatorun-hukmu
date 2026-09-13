@@ -1,20 +1,21 @@
 <!doctype html>
 <html lang="tr">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Oyuncu Envanteri · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Envanter · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
 <body>
-<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakter Oluşturucu</a><a href="esya-glif.html">Eşya & Glif Verme</a><a class="active" href="envanter.html">Oyuncu Envanteri</a><button id="logout">Çıkış</button></nav></div></header>
-<main class="shell page">
-<section class="page-head"><p class="eyebrow">GM · OYUNCU ENVANTERİ</p><h1>Oyuncu Envanterleri</h1><p>Oyuncular numaralı olarak listelenir. Bir karakter seçip eşyalarını, Gliflerini ve canlı kaynaklarını kontrol edebilirsin.</p><div id="statusMessage" class="status">Canlı bağlantı hazırlanıyor...</div></section>
-<div class="split">
-  <aside class="panel"><h2>Oyuncular</h2><div id="playerList" class="character-list"><div class="placeholder">Oyuncular yükleniyor...</div></div></aside>
-  <section>
-    <div class="panel"><p class="eyebrow">SEÇİLİ KARAKTER</p><h2 id="selectedName">—</h2><p id="selectedMeta">—</p><div id="runtimeSummary" class="status">Focus ve Glif durumu burada görünür.</div></div>
-    <div class="panel"><h2>Hızlı Eşya Ekle</h2><div class="form-grid"><div class="field"><label>EŞYA ADI</label><input id="quickItemName" placeholder="Sağlık İksiri"></div><div class="field"><label>ADET</label><input id="quickItemQty" type="number" min="1" value="1"></div></div><div class="actions"><button class="btn" id="quickAddItem">Eşyayı Ekle</button></div></div>
-    <div class="panel"><h2>Envanter</h2><div id="inventoryList"><div class="placeholder">Karakter seç.</div></div></div>
-    <div class="panel"><h2>Glifler</h2><div class="form-grid"><div class="field"><label>GLİF EKLE</label><select id="quickGlyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div></div><div class="actions"><button class="btn" id="quickAddGlyph">Glifi Ekle</button></div><div id="glyphList" style="margin-top:18px"><div class="placeholder">Karakter seç.</div></div></div>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakterler</a><a href="esya-glif.html">Eşya & Focus</a><a href="glif-atolyesi.html">Glif Atölyesi</a><a class="active" href="envanter.html">Envanter</a><button id="logout">Çıkış</button></nav></div></header>
+<main class="shell page compact-page">
+<section class="page-head compact-head"><p class="eyebrow">GM · ENVANTER</p><h1>Oyuncu Envanterleri</h1><p>Karakter seç, eşyalarını aynı ekranda gör ve düzenle.</p><div id="statusMessage" class="status">Hazırlanıyor...</div></section>
+<div class="inventory-workbench">
+  <aside class="panel compact-panel"><div class="section-heading"><div><p class="eyebrow">OYUNCULAR</p><h2>Karakterler</h2></div></div><div id="playerList" class="character-list scroll-list tall-list"><div class="placeholder">Oyuncular yükleniyor...</div></div></aside>
+  <section class="panel compact-panel">
+    <div class="section-heading"><div><p class="eyebrow">SEÇİLİ KARAKTER</p><h2 id="selectedName">—</h2><p id="selectedMeta" class="muted">—</p></div><div id="runtimeSummary" class="pill">Focus —</div></div>
+    <div class="inline-add"><div class="field"><label>EŞYA ADI</label><input id="quickItemName" placeholder="Sağlık İksiri"></div><div class="field qty-field"><label>ADET</label><input id="quickItemQty" type="number" min="1" value="1"></div><button class="btn align-end" id="quickAddItem">Ekle</button></div>
+    <div class="section-divider"></div>
+    <div class="section-heading"><div><p class="eyebrow">EŞYALAR</p><h2>Envanter</h2></div><span class="pill" id="itemCount">0 Eşya</span></div>
+    <div id="inventoryList" class="scroll-list inventory-scroll"><div class="placeholder">Karakter seç.</div></div>
+    <div class="workshop-link"><span>Glif yönetimi ayrı tutulur.</span><a class="btn secondary mini" href="glif-atolyesi.html">Glif Atölyesine Git</a></div>
   </section>
 </div>
 </main>
-<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/client-bootstrap"></script>
-<script type="module" src="../js/gm-inventory.js"></script>
+<script type="module" src="../js/gm-inventory-key.js"></script>
 </body></html>
