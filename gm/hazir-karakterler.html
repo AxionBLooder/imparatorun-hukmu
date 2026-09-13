@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hazır Karakterler · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakter Oluştur</a><a class="active" href="hazir-karakterler.html">Hazır Karakterler</a><a href="esya-glif.html">Eşya</a><a href="glif-atolyesi.html">Glif Atölyesi</a><a href="envanter.html">Envanter</a><button id="logout">Çıkış</button></nav></div></header>
+<main class="shell page compact-page">
+<section class="page-head compact-head"><p class="eyebrow">GM · HAZIR KARAKTERLER</p><h1>Hazır Karakterler</h1><p>Oluşturduğun karakterleri seç; gelişim limitlerini ve oyuncu erişimini buradan yönet.</p><div id="statusMessage" class="status">Hazırlanıyor...</div></section>
+<div class="inventory-workbench">
+  <aside class="panel compact-panel"><div class="section-heading"><div><p class="eyebrow">KARAKTERLER</p><h2>Hazır Liste</h2></div></div><div id="readyList" class="character-list scroll-list tall-list"><div class="placeholder">Karakterler yükleniyor...</div></div></aside>
+  <section class="panel compact-panel">
+    <div class="section-heading"><div><p class="eyebrow">SEÇİLİ KARAKTER</p><h2 id="readyName">—</h2><p id="readyMeta" class="muted">Karakter seç.</p></div><span id="readyAccess" class="pill">—</span></div>
+    <div class="stat-grid compact-player-stats" style="margin-top:14px"><div class="stat"><strong>BEDEN</strong><span id="readyBody">0</span></div><div class="stat"><strong>ÇEVİKLİK</strong><span id="readyAgility">0</span></div><div class="stat"><strong>ZİHİN</strong><span id="readyMind">0</span></div><div class="stat"><strong>İRADE</strong><span id="readyWill">0</span></div><div class="stat"><strong>ETKİ</strong><span id="readyImpact">0</span></div></div>
+    <div class="section-divider"></div>
+    <div class="section-heading"><div><p class="eyebrow">KAYNAK LİMİTLERİ</p><h2>Karakter Gelişimi</h2></div><span id="runtimePreview" class="pill">Focus — · Glif —</span></div>
+    <div class="form-grid"><div class="field"><label>MAKS. FOCUS</label><input id="maxFocus" type="number" min="0" value="0"></div><div class="field"><label>MAKS. HAZIR GLİF</label><input id="maxGlyph" type="number" min="0" value="0"></div></div>
+    <div class="actions compact-actions"><button class="btn" id="saveLimits">Limitleri Kaydet</button></div>
+    <div class="section-divider"></div>
+    <p class="eyebrow">OYUNCU ERİŞİMİ</p><div class="field"><label>DAVET BAĞLANTISI</label><input id="inviteLink" readonly placeholder="Davet oluşturulduğunda burada görünür"></div><div class="actions compact-actions"><button class="btn" id="invitePlayer">Davet Oluştur</button><button class="btn secondary" id="copyInvite">Kopyala</button><button class="btn secondary" id="revokePlayer">Erişimi Kaldır</button></div>
+    <div class="section-divider"></div>
+    <div class="actions compact-actions"><a class="btn secondary" href="glif-atolyesi.html">Glif Atölyesi</a><a class="btn secondary" href="esya-glif.html">Eşya Ver</a><button class="btn danger" id="deleteCharacter">Karakteri Sil</button></div>
+  </section>
+</div>
+</main>
+<script type="module" src="../js/gm-ready-characters.js"></script>
+</body></html>
