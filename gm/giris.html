@@ -9,7 +9,7 @@
     <p class="lead">GM paneline e-posta ve belirlediğin şifreyle giriş yapabilirsin.</p>
 
     <form id="gmLoginForm">
-      <div class="field"><label>GM HESABI</label><input value="resulcan834@gmail.com" disabled></div>
+      <div class="field"><label>GM HESABI</label><input id="gmAccount" value="resulcan834@gmail.com" disabled></div>
       <div class="field"><label>ŞİFRE</label><input id="gmPassword" type="password" minlength="8" autocomplete="current-password" placeholder="GM şifren"></div>
       <div class="actions"><button id="gmPasswordButton" class="btn" type="submit">Şifreyle Giriş</button><button id="gmMagicButton" class="btn secondary" type="button">İlk Giriş Bağlantısı Gönder</button><a class="btn secondary" href="../index.html">Ana Sayfa</a></div>
     </form>
@@ -27,5 +27,5 @@
   </section>
 </main>
 <script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/client-bootstrap"></script>
-<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/gm-login-ui"></script>
+<script type="module" src="../js/gm-login.js"></script>
 </body></html>
