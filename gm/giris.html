@@ -6,26 +6,14 @@
   <section class="hero-card" style="max-width:720px;margin:auto">
     <p class="eyebrow">YALNIZCA GM</p>
     <h1 style="font-size:54px">İmparatorun Hükmü</h1>
-    <p class="lead">GM paneline e-posta ve belirlediğin şifreyle giriş yapabilirsin.</p>
-
-    <form id="gmLoginForm">
-      <div class="field"><label>GM HESABI</label><input id="gmAccount" value="resulcan834@gmail.com" disabled></div>
-      <div class="field"><label>ŞİFRE</label><input id="gmPassword" type="password" minlength="8" autocomplete="current-password" placeholder="GM şifren"></div>
-      <div class="actions"><button id="gmPasswordButton" class="btn" type="submit">Şifreyle Giriş</button><button id="gmMagicButton" class="btn secondary" type="button">İlk Giriş Bağlantısı Gönder</button><a class="btn secondary" href="../index.html">Ana Sayfa</a></div>
-    </form>
-
-    <section id="passwordSetupPanel" class="panel" hidden style="margin-top:22px;text-align:left">
-      <h2>GM Şifresi Belirle / Değiştir</h2>
-      <p>Bu işlem açık GM oturumunu kullanır; e-posta göndermez.</p>
-      <form id="passwordSetupForm">
-        <div class="field"><label>YENİ ŞİFRE</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" placeholder="En az 8 karakter"></div>
-        <div class="actions"><button class="btn" type="submit">Şifreyi Kaydet</button><button id="goPanel" class="btn secondary" type="button">GM Paneline Gir</button></div>
-      </form>
-    </section>
-
-    <div id="statusMessage" class="status">Şifren varsa doğrudan giriş yap. İlk kurulumda giriş bağlantısını kullan.</div>
+    <p class="lead">GM girişi artık e-posta, şifre veya magic-link kullanmaz. Sana özel gizli GM bağlantısını açtığında panel doğrudan açılır.</p>
+    <div class="panel" style="margin-top:22px;text-align:left">
+      <h2>Özel GM Bağlantısı</h2>
+      <p>Bağlantıyı tarayıcında bir kez açtıktan sonra bu cihaz GM anahtarını saklar. Çıkış yaparsan yeniden özel bağlantını kullanırsın.</p>
+      <div class="actions"><button id="openSavedGm" class="btn" type="button">Kayıtlı GM Erişimini Aç</button><a class="btn secondary" href="../index.html">Ana Sayfa</a></div>
+    </div>
+    <div id="statusMessage" class="status">GM anahtarı kontrol ediliyor...</div>
   </section>
 </main>
-<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/client-bootstrap"></script>
-<script type="module" src="../js/gm-login.js"></script>
+<script type="module" src="../js/gm-key-login.js"></script>
 </body></html>
