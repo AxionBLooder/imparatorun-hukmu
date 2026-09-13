@@ -1,60 +1,14 @@
 <!doctype html>
 <html lang="tr">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eşya & Glif Verme · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eşya & Focus · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
 <body>
-<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakter Oluşturucu</a><a class="active" href="esya-glif.html">Eşya & Glif Verme</a><a href="envanter.html">Oyuncu Envanteri</a><button id="logout">Çıkış</button></nav></div></header>
-<main class="shell page">
-<section class="page-head"><p class="eyebrow">GM · CANLI KAYNAK YÖNETİMİ</p><h1>Eşya & Glif Verme</h1><p>Burada yaptığın değişiklikler oyuncunun açık karakter kağıdına otomatik yansır.</p><div id="statusMessage" class="status">Canlı bağlantı hazırlanıyor...</div></section>
-
-<section class="panel compact-panel"><h2>Karakter Seç</h2><div class="form-grid"><div class="field"><label>KARAKTER</label><select id="characterSelect"><option>Karakterler yükleniyor...</option></select></div><div class="field"><label>MEVCUT DURUM</label><input id="characterStatus" value="—" disabled></div></div></section>
-
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakterler</a><a class="active" href="esya-glif.html">Eşya & Focus</a><a href="glif-atolyesi.html">Glif Atölyesi</a><a href="envanter.html">Envanter</a><button id="logout">Çıkış</button></nav></div></header>
+<main class="shell page compact-page">
+<section class="page-head compact-head"><p class="eyebrow">GM · KAYNAK YÖNETİMİ</p><h1>Eşya & Focus</h1><p>Oyuncuya eşya ver ve Focus durumunu tek ekrandan yönet.</p><div id="statusMessage" class="status">Hazırlanıyor...</div></section>
+<section class="panel compact-panel"><div class="form-grid"><div class="field"><label>KARAKTER</label><select id="characterSelect"><option>Karakterler yükleniyor...</option></select></div><div class="field"><label>MEVCUT DURUM</label><input id="characterStatus" value="—" disabled></div></div></section>
 <div class="resource-duo">
-  <section class="panel resource-panel">
-    <p class="eyebrow">ENVANTER</p><h2>Eşya Ver</h2>
-    <div class="form-grid resource-form">
-      <div class="field wide"><label>EŞYA ADI</label><input id="itemName" placeholder="Örn. Sağlık İksiri"></div>
-      <div class="field"><label>VERİLECEK ADET</label><input id="itemAmount" type="number" min="1" value="1"></div>
-      <div class="field"><label>MAKSİMUM ADET</label><input id="itemMax" type="number" min="1" value="1"></div>
-      <div class="field wide"><label>OYUNCU AÇIKLAMASI</label><input id="itemDescription" placeholder="Kısa açıklama"></div>
-    </div>
-    <div class="actions"><button class="btn" id="giveItem">Eşyayı Ver</button></div>
-  </section>
-
-  <section class="panel resource-panel">
-    <p class="eyebrow">GLİF YÖNETİMİ</p><h2>Glif Ver</h2>
-    <div class="glyph-mode-tabs" role="group" aria-label="Glif türü">
-      <button class="glyph-mode active" type="button" data-glyph-mode="root">Kök Glif</button>
-      <button class="glyph-mode" type="button" data-glyph-mode="combine">Kombine Glif</button>
-      <button class="glyph-mode" type="button" data-glyph-mode="custom">Özel Glif</button>
-    </div>
-
-    <div id="glyphRootFields" class="form-grid resource-form glyph-fields">
-      <div class="field wide"><label>KÖK GLİF</label><select id="glyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div>
-    </div>
-
-    <div id="glyphCombineFields" class="form-grid resource-form glyph-fields" hidden>
-      <div class="field"><label>1. KÖK</label><select id="glyphRootA"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div>
-      <div class="field"><label>2. KÖK</label><select id="glyphRootB"><option>Rüzgâr</option><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Taş</option></select></div>
-      <div class="field wide"><label>KOMBİNE GLİF ADI</label><input id="glyphCombineName" placeholder="Birleşime göre otomatik gelir; istersen değiştir"></div>
-      <div id="glyphCombineHint" class="status wide compact-status">Kanonik birleşim eşleşmesi burada görünür.</div>
-    </div>
-
-    <div id="glyphCustomFields" class="form-grid resource-form glyph-fields" hidden>
-      <div class="field wide"><label>ÖZEL GLİF ADI</label><input id="glyphCustomName" placeholder="Örn. Kara Güneş Mührü"></div>
-    </div>
-
-    <div class="form-grid resource-form glyph-common">
-      <div class="field"><label>HAZIR GLİF SAYISINA EKLE</label><input id="glyphPrepared" type="number" min="0" value="0"></div>
-      <div class="field"><label>MAKS. HAZIR GLİF KAPASİTESİ</label><input id="glyphCapacity" type="number" min="0" value="0"></div>
-      <div class="field wide"><label>OYUNCU NOTU / ETKİ AÇIKLAMASI</label><input id="glyphNote" placeholder="İsteğe bağlı; özel etki veya kullanım notu"></div>
-    </div>
-    <div class="actions"><button class="btn" id="teachGlyph">Glifi Ver / Güncelle</button></div>
-  </section>
-</div>
-
-<div class="resource-duo lower-resource-duo">
-  <section class="panel compact-panel"><h2>Focus</h2><div class="form-grid"><div class="field"><label>FOCUS DEĞİŞİMİ</label><input id="focusDelta" type="number" value="0"></div><div class="field"><label>MAKS. FOCUS</label><input id="focusMax" type="number" min="0" value="0"></div></div><div class="actions"><button class="btn secondary" id="updateFocus">Focus Güncelle</button></div></section>
-  <section class="panel compact-panel"><h2>Canlı Akış</h2><div id="liveFeed" class="placeholder">Oyuncu kaynakları kullandıkça durum otomatik güncellenir.</div></section>
+  <section class="panel compact-panel"><p class="eyebrow">ENVANTER</p><h2>Eşya Ver</h2><div class="form-grid"><div class="field wide"><label>EŞYA ADI</label><input id="itemName" placeholder="Örn. Sağlık İksiri"></div><div class="field"><label>VERİLECEK ADET</label><input id="itemAmount" type="number" min="1" value="1"></div><div class="field"><label>MAKSİMUM ADET</label><input id="itemMax" type="number" min="1" value="1"></div><div class="field wide"><label>OYUNCU AÇIKLAMASI</label><input id="itemDescription" placeholder="Kısa ve okunaklı açıklama"></div></div><div class="actions"><button class="btn" id="giveItem">Eşyayı Ver</button></div></section>
+  <section class="panel compact-panel"><p class="eyebrow">CANLI KAYNAK</p><h2>Focus</h2><div class="form-grid"><div class="field"><label>FOCUS DEĞİŞİMİ</label><input id="focusDelta" type="number" value="0"></div><div class="field"><label>MAKS. FOCUS</label><input id="focusMax" type="number" min="0" value="0"></div></div><div class="actions"><button class="btn secondary" id="updateFocus">Focus Güncelle</button></div><div id="liveFeed" class="status compact-status">Karakter seçildiğinde canlı durum burada görünür.</div></section>
 </div>
 </main>
 <script type="module" src="../js/gm-resources-key.js"></script>
