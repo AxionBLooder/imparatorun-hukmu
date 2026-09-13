@@ -9,23 +9,19 @@
   <section class="panel compact-panel">
     <p class="eyebrow">KİMLİK</p><h2>Karakter Bilgisi</h2>
     <div class="form-grid"><div class="field"><label>OYUNCU ADI</label><input id="playerName" placeholder="Oyuncunun adı"></div><div class="field"><label>KARAKTER ADI</label><input id="characterName" placeholder="Karakterin adı"></div><div class="field"><label>IRK</label><select id="race"><option>İnsan</option><option>Hexborn</option><option>Wildblood</option><option>Graven</option><option>Veyl</option><option>Gloamling</option></select></div><div class="field"><label>IRKSAL SEÇİM</label><select id="raceSpecial"></select></div><div class="field wide"><label>KONSEPT</label><input id="concept" placeholder="Avcı, araştırmacı, şifacı..."></div></div>
-
     <div class="section-divider"></div>
     <p class="eyebrow">YETERLİLİKLER</p><div class="inline-stats compact-stats"><div class="field"><label>BEDEN</label><input id="statBody" type="number" min="0" max="3" value="0"></div><div class="field"><label>ÇEVİKLİK</label><input id="statAgility" type="number" min="0" max="3" value="0"></div><div class="field"><label>ZİHİN</label><input id="statMind" type="number" min="0" max="3" value="0"></div><div class="field"><label>İRADE</label><input id="statWill" type="number" min="0" max="3" value="0"></div><div class="field"><label>ETKİ</label><input id="statImpact" type="number" min="0" max="3" value="0"></div></div><div class="status compact-status">Dağıtılan: <strong id="statTotal">0 / 8</strong></div>
   </section>
-
   <section class="panel compact-panel">
     <p class="eyebrow">DETAY</p><h2>Uzmanlık & Oyuncu</h2>
-    <div class="form-grid"><div class="field"><label>UZMANLIKLAR</label><input id="skills" placeholder="Atletizm, Gizlilik, Arcana"></div><div class="field"><label>HAZIR GLİF KAPASİTESİ</label><input id="glyphMax" type="number" min="0" value="2"></div><div class="field wide"><label>OYUNCU NOTU</label><textarea id="playerNotes" class="short-textarea" placeholder="Oyuncunun görebileceği kısa bilgi"></textarea></div></div>
-
+    <div class="field"><label>UZMANLIKLAR</label><input id="skills" placeholder="Atletizm, Gizlilik, Arcana"></div>
+    <div class="field" style="margin-top:12px"><label>OYUNCU NOTU</label><textarea id="playerNotes" class="short-textarea" placeholder="Oyuncunun görebileceği kısa bilgi"></textarea></div>
     <div class="section-divider"></div>
     <p class="eyebrow">DAVET</p><div class="field"><label>OYUNCU BAĞLANTISI</label><input id="inviteLink" readonly placeholder="Henüz bağlantı oluşturulmadı"></div><div class="actions compact-actions"><button class="btn" id="invitePlayer">Davet Oluştur</button><button class="btn secondary" id="copyInvite">Kopyala</button><button class="btn secondary" id="revokePlayer">Erişimi Kaldır</button></div>
-
     <div class="section-divider"></div>
     <div class="actions compact-actions"><button class="btn" id="createCharacter">Yeni Oluştur</button><button class="btn secondary" id="updateCharacter">Güncelle</button><button class="btn danger" id="deleteCharacter">Sil</button></div>
   </section>
-
-  <section class="panel compact-panel span-2"><div class="section-heading"><div><p class="eyebrow">KAYITLAR</p><h2>Kayıtlı Karakterler</h2></div></div><div id="characterList" class="character-list scroll-list horizontal-on-wide"><div class="placeholder">Karakterler yükleniyor...</div></div></section>
+  <section class="panel compact-panel span-2"><div class="section-heading"><div><p class="eyebrow">KAYITLAR</p><h2>Kayıtlı Karakterler</h2></div><a class="btn secondary mini" href="glif-atolyesi.html">Glif Atölyesi</a></div><div id="characterList" class="character-list scroll-list horizontal-on-wide"><div class="placeholder">Karakterler yükleniyor...</div></div></section>
 </div>
 </main>
 <script type="module" src="../js/gm-characters-key.js"></script>
