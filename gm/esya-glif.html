@@ -1,60 +1,16 @@
 <!doctype html>
 <html lang="tr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eşya & Glif Verme · İmparatorun Hükmü</title>
-  <link rel="stylesheet" href="../assets/style.css" />
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eşya & Glif Verme · İmparatorun Hükmü</title><link rel="stylesheet" href="../assets/style.css"></head>
 <body>
-<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakter Oluşturucu</a><a class="active" href="esya-glif.html">Eşya & Glif Verme</a><a href="../oyuncu/index.html">Oyuncu Görünümü</a></nav></div></header>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a href="karakterler.html">Karakter Oluşturucu</a><a class="active" href="esya-glif.html">Eşya & Glif Verme</a><a href="envanter.html">Oyuncu Envanteri</a><button id="logout">Çıkış</button></nav></div></header>
 <main class="shell page">
-  <section class="page-head"><p class="eyebrow">GM BÖLÜMÜ</p><h1>Eşya & Glif Verme</h1><p>Bu sayfa yalnızca mevcut karakterlere canlı kaynak vermek veya düzenlemek için kullanılır. Karakter oluşturma ayarları burada bulunmaz.</p></section>
-
-  <section class="panel">
-    <h2>Karakter Seç</h2>
-    <div class="form-grid">
-      <div class="field"><label>KARAKTER</label><select id="characterSelect"><option>Canlı veritabanı bağlanınca karakterler burada görünecek</option></select></div>
-      <div class="field"><label>MEVCUT DURUM</label><input id="characterStatus" value="Henüz canlı bağlantı yok" disabled /></div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2>Eşya Ver</h2>
-    <div class="form-grid">
-      <div class="field"><label>EŞYA ADI</label><input id="itemName" placeholder="Örn. Sağlık İksiri" /></div>
-      <div class="field"><label>ADET</label><input id="itemAmount" type="number" min="1" value="1" /></div>
-      <div class="field"><label>MAKSİMUM ADET</label><input id="itemMax" type="number" min="1" value="1" /></div>
-      <div class="field"><label>AÇIKLAMA</label><input id="itemDescription" placeholder="Oyuncunun görebileceği kısa açıklama" /></div>
-    </div>
-    <div class="actions"><button class="btn" id="giveItem">Eşyayı Karaktere Ver</button></div>
-  </section>
-
-  <section class="panel">
-    <h2>Glif Öğret / Kapasite Düzenle</h2>
-    <div class="form-grid">
-      <div class="field"><label>GLİF</label><select id="glyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div>
-      <div class="field"><label>HAZIR GLİF EKLE</label><input id="glyphPrepared" type="number" min="0" value="0" /></div>
-      <div class="field"><label>MAKS. HAZIR GLİF KAPASİTESİ</label><input id="glyphCapacity" type="number" min="0" value="0" /></div>
-      <div class="field"><label>NOT</label><input id="glyphNote" placeholder="İsteğe bağlı oyuncu notu" /></div>
-    </div>
-    <div class="actions"><button class="btn" id="teachGlyph">Glifi Öğret / Güncelle</button></div>
-  </section>
-
-  <section class="panel">
-    <h2>Focus & Kaynak</h2>
-    <div class="form-grid">
-      <div class="field"><label>FOCUS DEĞİŞİMİ</label><input id="focusDelta" type="number" value="0" /></div>
-      <div class="field"><label>MAKS. FOCUS</label><input id="focusMax" type="number" min="0" value="0" /></div>
-    </div>
-    <div class="actions"><button class="btn secondary" id="updateFocus">Focus Güncelle</button></div>
-  </section>
-
-  <section class="panel">
-    <h2>Canlı Akış</h2>
-    <div class="placeholder" id="liveFeed">Supabase bağlandığında burada yaptığın eşya, Glif ve Focus değişiklikleri oyuncunun açık karakter kağıdına anında düşecek.</div>
-  </section>
+<section class="page-head"><p class="eyebrow">GM · CANLI KAYNAK YÖNETİMİ</p><h1>Eşya & Glif Verme</h1><p>Burada yaptığın değişiklikler oyuncunun açık karakter kağıdına gerçek zamanlı düşer.</p><div id="statusMessage" class="status">Canlı bağlantı hazırlanıyor...</div></section>
+<section class="panel"><h2>Karakter Seç</h2><div class="form-grid"><div class="field"><label>KARAKTER</label><select id="characterSelect"><option>Karakterler yükleniyor...</option></select></div><div class="field"><label>MEVCUT DURUM</label><input id="characterStatus" value="—" disabled></div></div></section>
+<section class="panel"><h2>Eşya Ver</h2><div class="form-grid"><div class="field"><label>EŞYA ADI</label><input id="itemName" placeholder="Örn. Sağlık İksiri"></div><div class="field"><label>VERİLECEK ADET</label><input id="itemAmount" type="number" min="1" value="1"></div><div class="field"><label>MAKSİMUM ADET</label><input id="itemMax" type="number" min="1" value="1"></div><div class="field"><label>OYUNCU AÇIKLAMASI</label><input id="itemDescription" placeholder="Kısa açıklama"></div></div><div class="actions"><button class="btn" id="giveItem">Eşyayı Ver</button></div></section>
+<section class="panel"><h2>Glif Öğret & Kapasite</h2><div class="form-grid"><div class="field"><label>GLİF</label><select id="glyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div><div class="field"><label>HAZIR GLİF SAYISINA EKLE</label><input id="glyphPrepared" type="number" min="0" value="0"></div><div class="field"><label>MAKS. HAZIR GLİF KAPASİTESİ</label><input id="glyphCapacity" type="number" min="0" value="0"></div><div class="field"><label>OYUNCU NOTU</label><input id="glyphNote" placeholder="İsteğe bağlı"></div></div><div class="actions"><button class="btn" id="teachGlyph">Glifi Öğret / Güncelle</button></div></section>
+<section class="panel"><h2>Focus</h2><div class="form-grid"><div class="field"><label>FOCUS DEĞİŞİMİ</label><input id="focusDelta" type="number" value="0"></div><div class="field"><label>MAKS. FOCUS</label><input id="focusMax" type="number" min="0" value="0"></div></div><div class="actions"><button class="btn secondary" id="updateFocus">Focus Güncelle</button></div></section>
+<section class="panel"><h2>Canlı Akış</h2><div id="liveFeed" class="placeholder">Oyuncu kaynakları kullandıkça durum otomatik güncellenir.</div></section>
 </main>
-<script type="module" src="../js/gm-resources.js"></script>
-</body>
-</html>
+<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/client-bootstrap"></script>
+<script type="module" src="https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/gm-resources-ui"></script>
+</body></html>
