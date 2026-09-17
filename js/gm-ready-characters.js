@@ -1,4 +1,4 @@
-import {api,requireKey,logout} from './gm-key-client.js';
+import {api,requireKey,logout} from './gm-key-client.js?v=fast-nav-v1';
 const $=s=>document.querySelector(s);let chars=[],selected=null,invites=new Map(),refreshing=false;
 const say=t=>{const e=$('#statusMessage');if(e)e.textContent=t};
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
