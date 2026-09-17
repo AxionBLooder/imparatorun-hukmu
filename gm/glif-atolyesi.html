@@ -12,12 +12,13 @@
     <div class="glyph-mode-tabs"><button class="glyph-mode active" type="button" data-glyph-mode="root">Kök</button><button class="glyph-mode" type="button" data-glyph-mode="combine">Kombine</button><button class="glyph-mode" type="button" data-glyph-mode="custom">Özel</button></div>
     <div id="glyphRootFields" class="glyph-fields">
       <div class="form-grid">
-        <div class="field"><label>MEVCUT KÖK GLİF</label><select id="glyphName"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div>
+        <div class="field"><label>KÖK GLİF KÜTÜPHANESİ</label><select id="glyphName"><option>Kütüphane yükleniyor...</option></select></div>
         <div class="field"><label>KEŞFEDİLEN YENİ KÖK GLİF</label><input id="glyphDiscoveredRoot" placeholder="Örn. Gölge, Kan, Yıldırım..."></div>
       </div>
-      <div class="status compact-status">Yeni bir Kök Glif keşfedildiyse adını sağdaki alana yaz. Boş bırakırsan mevcut listeden seçilen Kök Glif verilir.</div>
+      <div id="rootLibraryPreview" class="status compact-status">Kök Glif kütüphanesi yükleniyor...</div>
+      <div class="status compact-status">Yeni bir Kök Glif keşfedildiyse adını sağdaki alana yaz. Oyuncuya verdiğinde otomatik olarak kalıcı Kök Glif Kütüphanesi'ne eklenir ve bundan sonra tüm Kök/Kombine seçimlerinde görünür.</div>
     </div>
-    <div id="glyphCombineFields" class="glyph-fields" hidden><div class="form-grid"><div class="field"><label>1. KÖK</label><select id="glyphRootA"><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Rüzgâr</option><option>Taş</option></select></div><div class="field"><label>2. KÖK</label><select id="glyphRootB"><option>Rüzgâr</option><option>Ateş</option><option>Buz</option><option>Bitki</option><option>Işık</option><option>Taş</option></select></div></div><div class="field"><label>KOMBİNE GLİF ADI</label><input id="glyphCombineName" placeholder="Otomatik gelir; istersen değiştir"></div><div id="glyphCombineHint" class="status compact-status">Kanonik birleşim burada görünür.</div></div>
+    <div id="glyphCombineFields" class="glyph-fields" hidden><div class="form-grid"><div class="field"><label>1. KÖK</label><select id="glyphRootA"><option>Kütüphane yükleniyor...</option></select></div><div class="field"><label>2. KÖK</label><select id="glyphRootB"><option>Kütüphane yükleniyor...</option></select></div></div><div class="field"><label>KOMBİNE GLİF ADI</label><input id="glyphCombineName" placeholder="Otomatik gelir; istersen değiştir"></div><div id="glyphCombineHint" class="status compact-status">Kanonik birleşim burada görünür.</div></div>
     <div id="glyphCustomFields" class="glyph-fields" hidden><div class="field"><label>ÖZEL GLİF ADI</label><input id="glyphCustomName" placeholder="Örn. Kara Güneş Mührü"></div></div>
     <div class="field"><label>OYUNCU AÇIKLAMASI / ETKİ</label><textarea id="glyphNote" class="short-textarea" placeholder="Glifin etkisi, kullanım şartı veya kısa not"></textarea></div>
     <div class="actions"><button class="btn" id="giveGlyph">Glifi Oyuncuya Ver</button></div>
@@ -28,5 +29,5 @@
   </section>
 </div>
 </main>
-<script type="module" src="../js/gm-glyph-workshop.js?v=root-discovery-v1"></script>
+<script type="module" src="../js/gm-glyph-workshop.js?v=root-library-v2"></script>
 </body></html>
