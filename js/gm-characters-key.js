@@ -1,4 +1,4 @@
-import {api,requireKey,logout} from './gm-key-client.js';
+import {api,requireKey,logout} from './gm-key-client.js?v=fast-nav-v1';
 const $=s=>document.querySelector(s);const statIds=['statBody','statAgility','statMind','statWill','statImpact'];
 const say=t=>{const e=$('#statusMessage');if(e)e.textContent=t};
 function statTotal(){const n=statIds.reduce((a,id)=>a+(Number($('#'+id)?.value)||0),0);$('#statTotal').textContent=n+' / 8';return n}
