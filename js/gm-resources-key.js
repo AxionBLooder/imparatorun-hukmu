@@ -1,4 +1,4 @@
-import {api,requireKey,logout} from './gm-key-client.js';
+import {api,requireKey,logout} from './gm-key-client.js?v=fast-nav-v1';
 const $=s=>document.querySelector(s);let chars=[],cid=null,refreshing=false;const say=t=>{const e=$('#statusMessage');if(e)e.textContent=t};
 async function loadCharacters(){const d=await api('gm-key-characters',{action:'list'});chars=d.characters||[];const keep=cid||$('#characterSelect')?.value||'';$('#characterSelect').innerHTML='<option value="">Karakter seç...</option>'+chars.map((c,i)=>`<option value="${c.id}">${i+1}. ${c.character_name} · ${c.race}</option>`).join('');if(keep&&chars.some(c=>c.id===keep)){$('#characterSelect').value=keep;cid=keep}}
 async function loadStatus(){cid=$('#characterSelect').value||null;if(!cid){$('#characterStatus').value='Karakter seç';return}const d=await api('gm-key-details',{character_id:cid});const items=d.items||[];$('#characterStatus').value=`${items.length} eşya`;}
