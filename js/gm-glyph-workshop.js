@@ -1,4 +1,4 @@
-import {api,requireKey,logout} from './gm-key-client.js';
+import {api,requireKey,logout} from './gm-key-client.js?v=fast-nav-v1';
 const $=s=>document.querySelector(s);let chars=[],cid=null,glyphMode='root',rootLibrary=[],refreshing=false;const say=t=>{const e=$('#statusMessage');if(e)e.textContent=t};
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const COMBOS={'Ateş|Rüzgâr':'Alev Püskürtme','Buz|Rüzgâr':'Kar Fırtınası','Bitki|Taş':'Kök Duvar','Bitki|Işık':'Şifa Çiçeği','Ateş|Taş':'Erimiş Kaya','Buz|Işık':'Prizma Bariyeri','Rüzgâr|Taş':'Taş Mermiler','Bitki|Buz':'Kristal Dikenler'};
