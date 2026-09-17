@@ -1,4 +1,4 @@
-import {api,requireKey,logout} from './gm-key-client.js';
+import {api,requireKey,logout} from './gm-key-client.js?v=fast-nav-v1';
 const $=s=>document.querySelector(s);let chars=[],selectedId=null,refreshing=false;const say=t=>{const e=$('#statusMessage');if(e)e.textContent=t};
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 async function loadCharacters(){const d=await api('gm-key-characters',{action:'list'});chars=d.characters||[];if(!selectedId&&chars[0])selectedId=chars[0].id;const box=$('#playerList');box.innerHTML=chars.length?chars.map((c,i)=>`<button class="character-row ${c.id===selectedId?'active':''}" data-id="${c.id}"><b>${i+1}. ${esc(c.character_name)}</b><span>${esc(c.player_name||'Oyuncu atanmadı')} · ${esc(c.race)}</span></button>`).join(''):'<div class="placeholder">Henüz karakter yok.</div>';box.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{selectedId=b.dataset.id;box.querySelectorAll('[data-id]').forEach(x=>x.classList.toggle('active',x.dataset.id===selectedId));loadDetails().catch(e=>say('Hata: '+e.message))});}
