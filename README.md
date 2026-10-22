@@ -18,7 +18,7 @@ Taslak işlemlerini canlı tarafa geçirirken her olayda benzersiz kayıt kimli�
 ## Aktif bölümler
 
 - `index.html` — ana portal
-- `gm/giris.html` — yalnızca GM için e-posta bağlantılı giriş
+- `gm/giris.html` — özel GM bağlantısıyla e-postasız, kodsuz giriş
 - `gm/karakterler.html` — karakter oluşturma, yeterlilikler, ırk seçimi, oyuncu daveti
 - `gm/esya-glif.html` — eşya, Glif, Focus ve Glif kapasitesi verme
 - `gm/envanter.html` — tüm oyuncuları 1, 2, 3… şeklinde görüp envanter/Glif yönetme
@@ -37,19 +37,25 @@ Oyuncu tüketilebilir eşyalarında yalnızca mevcut adedi `- / +` ile değişti
 
 Oyuncu kaydı açık bir kayıt formuyla yapılmaz. GM, Karakter Oluşturucu içindeki **Oyuncuya Davet Gönder** düğmesini kullanır. Davet Supabase Edge Function üzerinden gönderilir ve fonksiyon çağıranın GM olduğunu doğrular. Davetsiz hesaplar karakter verisine erişemez. RLS tüm oyuncu verisini karakter sahibine göre sınırlar.
 
+## GM özel bağlantısı
+
+GM yetkisi, sunucuda doğrulanan güçlü ve özel bir erişim anahtarıyla verilebilir. Bu anahtarın kendisi GitHub'da veya halka açık web dosyalarında tutulmaz; yalnızca SHA-256 özeti Supabase Edge Function'larda yer alır. Özel bağlantıdaki anahtar URL'nin `#gm=` fragment'indedir (HTTP isteğinde sunucuya gönderilmez). İlk açılışta tarayıcıya kaydedilir ve adres çubuğundan çıkarılır. Sonraki ziyaretlerde e-posta, kod veya şifre istemez.
+
+Bu bağlantı bir GM erişim kimliğidir: **kimseyle paylaşılmamalı**, herkese açık mesajlarda yayımlanmamalıdır. Ele geçirilirse ilgili anahtar sunucu tarafında kaldırılarak erişim iptal edilmelidir. Diğer projelerin Supabase kaynaklarından bağımsızdır.
+
 ## Kod güvenliği
 
 - Secret/service-role anahtarları GitHub'a veya tarayıcı koduna yazılmaz.
 - Public Supabase istemcisi `client-bootstrap` Edge Function üzerinden yüklenir.
 - Karakter, Eşya & Glif ve Oyuncu Envanteri birbirinden ayrı modüllerdir.
 - Veritabanı değişiklikleri migration olarak tutulur; çalışan şema geriye dönük izlenebilir.
-- Supabase Security Advisor şu anda uyarısızdır.
+- Supabase Security Advisor uyarıları düzenli olarak incelenmelidir.
 
 ## İlk yayın için iki ayar
 
 1. GitHub repository `Settings → Pages` bölümünde `Deploy from a branch`, `main`, `/ (root)` seçilip kaydedilir.
-2. Supabase `Authentication → URL Configuration` içinde Site URL `https://axionblooder.github.io/imparatorun-hukmu/` yapılır. Redirect URLs listesine şu iki adres eklenir:
+2. E-posta oturumu isteğe bağlıysa Supabase `Authentication → URL Configuration` içinde Site URL `https://axionblooder.github.io/imparatorun-hukmu/` yapılır. Redirect URLs listesine şu iki adres eklenir:
    - `https://axionblooder.github.io/imparatorun-hukmu/gm/karakterler.html`
    - `https://axionblooder.github.io/imparatorun-hukmu/oyuncu/index.html`
 
-Bu iki ayardan sonra GM girişi, oyuncu daveti ve canlı senkronizasyon production URL üzerinde çalışır.
+E-postasız özel GM bağlantısı için Supabase Auth e-posta yönlendirme ayarı gerekmez.

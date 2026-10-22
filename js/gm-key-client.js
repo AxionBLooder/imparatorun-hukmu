@@ -17,11 +17,13 @@ export function authClient(){
 }
 
 async function accessHeaders(){
+  // Özel GM bağlantısı cihazda kayıtlıysa CDN / e-posta oturumu beklemeyiz.
+  const key=captureKey();
+  if(key)return {'x-gm-key':key};
   const db=await authClient();
   const {data:{session}}=await db.auth.getSession();
   if(session?.access_token)return {Authorization:'Bearer '+session.access_token};
-  const key=captureKey();
-  return key?{'x-gm-key':key}:null;
+  return null;
 }
 
 function clearApiCache(){
@@ -73,11 +75,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 export function captureKey(){
   const u=new URL(location.href);
-  const incoming=u.searchParams.get('gm');
+  // URL fragment'i sunucuya veya HTTP referer'a gitmez.
+  const fragment=new URLSearchParams(u.hash.replace(/^#/,''));
+  const incoming=fragment.get('gm')||u.searchParams.get('gm');
   if(incoming&&incoming.length>40){
     localStorage.setItem(STORAGE,incoming);
     u.searchParams.delete('gm');
-    history.replaceState(null,'',u.pathname+(u.search||'')+(u.hash||''));
+    fragment.delete('gm');
+    history.replaceState(null,'',u.pathname+(u.search||'')+(fragment.size?'#'+fragment.toString():''));
   }
   return localStorage.getItem(STORAGE)||'';
 }
