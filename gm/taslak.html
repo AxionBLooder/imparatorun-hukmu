@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0c10">
+  <title>GM Çalışma Alanı · İmparatorun Hükmü</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/gm-preview.css">
+</head>
+<body>
+<header class="topbar"><div class="shell"><a class="brand" href="../index.html">İmparatorun Hükmü</a><nav class="nav"><a class="active" href="taslak.html">GM Çalışma Alanı</a><a href="../index.html">Ana Portal</a></nav></div></header>
+<main class="shell page preview-page">
+  <section class="preview-intro">
+    <div><p class="eyebrow">GM · GELİŞTİRME MODU</p><h1>İmparatorun Masası</h1><p>Glifleri, karakterleri ve kaynakları dene. Yaptığın her işlem aşağıdaki kayıt defterine işlenir.</p></div>
+    <span class="preview-mode">● Yerel taslak</span>
+  </section>
+  <div class="preview-notice"><strong>Canlı verilerden bağımsız.</strong> Bu çalışma alanı e-posta, GM anahtarı ve Supabase istemez. İşlemler yalnızca bu tarayıcıda saklanır; aynı cihazdaki diğer sekmelerle güncellenir. Farklı oyunculara henüz yansımaz.</div>
+
+  <div class="preview-stats" aria-label="Taslak özeti">
+    <div><span>Karakterler</span><strong id="statCharacters">0</strong></div>
+    <div><span>Kütüphane Glifleri</span><strong id="statGlyphs">0</strong></div>
+    <div><span>Dağıtılan Glifler</span><strong id="statAssigned">0</strong></div>
+    <div><span>İşlem Kaydı</span><strong id="statLogs">0</strong></div>
+  </div>
+
+  <div class="preview-layout">
+    <aside class="preview-sidebar">
+      <section class="panel compact-panel">
+        <div class="section-heading"><div><p class="eyebrow">OYUNCULAR</p><h2>Karakterler</h2></div></div>
+        <div id="characterList" class="character-list preview-character-list"><div class="placeholder">Henüz karakter yok.</div></div>
+        <form id="characterForm" class="preview-form">
+          <div class="field"><label for="characterName">KARAKTER ADI</label><input id="characterName" maxlength="70" placeholder="Örn. Arin" required></div>
+          <div class="field"><label for="playerName">OYUNCU ADI</label><input id="playerName" maxlength="70" placeholder="İsteğe bağlı"></div>
+          <button class="btn" type="submit">Karakter Oluştur</button>
+        </form>
+        <div class="preview-sidebar-footer"><button class="btn secondary mini" id="loadExamples" type="button">Örnek Verileri Yükle</button><button class="btn danger mini" id="deleteCharacter" type="button">Seçili Karakteri Sil</button></div>
+      </section>
+    </aside>
+
+    <div class="preview-content">
+      <section class="panel compact-panel">
+        <div class="section-heading"><div><p class="eyebrow">SEÇİLİ KARAKTER</p><h2 id="selectedName">Karakter seç</h2><p id="selectedMeta">İşlem yapmak için bir karakter oluştur.</p></div><span class="pill" id="characterBadge">Hazır değil</span></div>
+        <div class="preview-resources">
+          <div class="preview-counter"><span>Focus</span><div class="counter"><button type="button" data-resource="focus" data-delta="-1" aria-label="Focus azalt">−</button><b id="focusValue">—</b><button type="button" data-resource="focus" data-delta="1" aria-label="Focus artır">+</button></div></div>
+          <div class="preview-counter"><span>Yara</span><div class="counter"><button type="button" data-resource="wounds" data-delta="-1" aria-label="Yara azalt">−</button><b id="woundsValue">—</b><button type="button" data-resource="wounds" data-delta="1" aria-label="Yara artır">+</button></div></div>
+          <div class="preview-counter"><span>Hazır Glif</span><div class="counter"><button type="button" data-resource="prepared" data-delta="-1" aria-label="Hazır Glif azalt">−</button><b id="preparedValue">—</b><button type="button" data-resource="prepared" data-delta="1" aria-label="Hazır Glif artır">+</button></div></div>
+        </div>
+      </section>
+
+      <div class="preview-workbench">
+        <section class="panel compact-panel">
+          <div class="section-heading"><div><p class="eyebrow">GLİF ATÖLYESİ</p><h2>Glif Kütüphanesi</h2></div></div>
+          <form id="glyphForm" class="preview-form">
+            <div class="field"><label for="glyphName">GLİF ADI</label><input id="glyphName" maxlength="90" required placeholder="Örn. Gölge Mührü"></div>
+            <div class="field"><label for="glyphKind">TÜR</label><select id="glyphKind"><option value="Kök">Kök Glif</option><option value="Kombine">Kombine Glif</option><option value="Özel">Özel Glif</option></select></div>
+            <div class="field"><label for="glyphEffect">ETKİ / AÇIKLAMA</label><textarea id="glyphEffect" class="short-textarea" maxlength="500" placeholder="Ne yapar, nasıl kullanılır?"></textarea></div>
+            <button class="btn" type="submit">Glifi Oluştur</button>
+          </form>
+          <div class="section-divider"></div>
+          <div class="field"><label for="librarySelect">KAYITLI GLİF</label><select id="librarySelect"><option value="">Önce glif oluştur.</option></select></div>
+          <div class="actions"><button class="btn secondary" id="assignGlyph" type="button">Seçili Karaktere Ver</button><button class="btn danger" id="removeLibraryGlyph" type="button">Kütüphaneden Sil</button></div>
+        </section>
+
+        <section class="panel compact-panel">
+          <div class="section-heading"><div><p class="eyebrow">KARAKTER</p><h2>Bilinen Glifler</h2></div><span class="pill" id="assignedCount">0</span></div>
+          <div id="assignedGlyphs" class="preview-list"><div class="placeholder">Karakter seç.</div></div>
+          <div class="section-divider"></div>
+          <div class="section-heading"><div><p class="eyebrow">ÇANTA</p><h2>Envanter</h2></div></div>
+          <form id="itemForm" class="preview-item-form">
+            <div class="field"><label for="itemName">EŞYA</label><input id="itemName" maxlength="90" required placeholder="Örn. İksir"></div>
+            <div class="field"><label for="itemQty">ADET</label><input id="itemQty" type="number" min="1" max="999" value="1" required></div>
+            <button class="btn" type="submit">Ekle</button>
+          </form>
+          <div id="itemList" class="preview-list"><div class="placeholder">Henüz eşya yok.</div></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <section class="panel compact-panel preview-logs" id="islem-kayitlari">
+    <div class="section-heading"><div><p class="eyebrow">FAALİYET GEÇMİŞİ</p><h2>İşlem Kayıtları</h2><p>Karakter, Glif, envanter, kaynak ve silme işlemleri burada görünür.</p></div><span class="pill" id="logCount">0 kayıt</span></div>
+    <div class="preview-log-tools">
+      <div class="field"><label for="logCategory">KATEGORİ</label><select id="logCategory"><option value="all">Tüm işlemler</option><option value="glif">Glifler</option><option value="character">Karakterler</option><option value="inventory">Envanter</option><option value="resource">Kaynaklar</option><option value="system">Sistem / Silme</option></select></div>
+      <div class="field"><label for="logSearch">KAYITLARDA ARA</label><input id="logSearch" type="search" placeholder="Karakter, Glif veya işlem ara..."></div>
+      <div class="preview-log-info">Bir kaydı silmek onu listeden gizler; bu silme işlemi de yeni bir sistem kaydı olarak tutulur.</div>
+    </div>
+    <div id="logList" class="preview-log-list" aria-live="polite"><div class="placeholder">Henüz işlem kaydı yok.</div></div>
+  </section>
+  <div id="previewStatus" role="status" class="preview-toast" hidden></div>
+</main>
+<script type="module" src="../js/gm-preview.js"></script>
+</body>
+</html>
