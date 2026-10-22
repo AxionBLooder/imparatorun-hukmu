@@ -1,6 +1,19 @@
 # İmparatorun Hükmü
 
-Canlı GM ↔ oyuncu senkronizasyonlu FRP yardımcı uygulaması.
+GM ↔ oyuncu senkronizasyonu hedefleyen FRP yardımcı uygulaması. Canlı servis devre dışıyken aşağıdaki yerel çalışma alanı kullanılabilir.
+
+## GM çalışma alanı (Supabase kapalıyken)
+
+`gm/taslak.html` adresindeki **GM Çalışma Alanı**, mevcut canlı GM API'sinden tamamen bağımsız bir geliştirme/deneme ortamıdır. E-posta ve özel GM anahtarı istemez. Burada karakter oluşturabilir, Kök/Kombine/Özel Glifleri kütüphaneye ekleyebilir, oyuncuya Glif verebilir veya kaldırabilir, envanter ve Focus/Yara/Hazır Glif değerlerini değiştirebilirsin.
+
+- Her işlem için kategori, zaman, hedef ve işlem açıklamasını içeren log oluşturulur. Arama, kategori filtresi ve tek kayıt silme vardır. Silinen kayıt normal listeden gizlenir; silme hareketi yeni bir sistem kaydı olarak tutulur.
+- Taslak veriler sadece tarayıcının `localStorage` alanında tutulur. Aynı siteyi aynı cihazda açan sekmeler `storage`/`BroadcastChannel` ile güncellenir. **Farklı kullanıcılar veya cihazlar arasında henüz paylaşılmaz.**
+- Bu ortam gerçek karakter, Glif, envanter veya oyuncu hesaplarını değiştirmez. Gerçek GM erişimi hâlâ sunucunun doğruladığı özel GM anahtarını gerektirir. Taslak, canlı GM yetkisini baypas etmez.
+- Supabase yeniden etkinleştirildiğinde çok oyunculu log için sunucuda kalıcı bir olay tablosu, kimliği doğrulanmış yazarlar, yetkili silme, RLS ve Realtime yayını gerekecektir. Tarayıcı loglarını doğrudan güvenilir sunucu logu olarak kabul etme.
+
+### Log olaylarının gelecekteki sunucu biçimi
+
+Taslak işlemlerini canlı tarafa geçirirken her olayda benzersiz kayıt kimliği, `created_at`, doğrulanmış `actor_id`, karakter/Glif/eşya gibi hedef bilgisi, kategori, işlem türü ve açıklama tutulmalıdır. Kaydı silme işlemi fiziksel olarak yok etmek yerine `deleted_at` işaretlemeli ve ayrıca `log.delete` olayı üretmelidir. Sunucu yazımı başarılı olmadan arayüz işlemi başarıyla kaydedildi dememelidir. GM ve oyuncular yalnızca RLS ile izin verilen kayıtları görmelidir.
 
 ## Aktif bölümler
 
