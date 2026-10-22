@@ -1,8 +1,28 @@
 const FN='https://zhawcmqsbkmgjdhevtbl.supabase.co/functions/v1/';
+const SUPABASE_URL='https://zhawcmqsbkmgjdhevtbl.supabase.co';
+// Supabase publishable key: tarayıcıda kullanılmak üzere tasarlanmıştır (service-role değildir).
+const PUBLISHABLE_KEY='sb_publishable_k3-pXbc61FKhQMg1m7agIQ_VDJe9Xer';
 const STORAGE='ih_gm_private_key';
 const CACHE_PREFIX='ih_gm_api_cache:';
 const CACHE_TTL=5000;
 const inFlight=new Map();
+let clientPromise;
+
+export function authClient(){
+  if(!clientPromise)clientPromise=import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')
+    .then(({createClient})=>createClient(SUPABASE_URL,PUBLISHABLE_KEY,{
+      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'ih-gm-auth'}
+    }));
+  return clientPromise;
+}
+
+async function accessHeaders(){
+  const db=await authClient();
+  const {data:{session}}=await db.auth.getSession();
+  if(session?.access_token)return {Authorization:'Bearer '+session.access_token};
+  const key=captureKey();
+  return key?{'x-gm-key':key}:null;
+}
 
 function clearApiCache(){
   try{
@@ -64,19 +84,23 @@ export function captureKey(){
 
 export function hasKey(){return !!captureKey()}
 export function clearKey(){localStorage.removeItem(STORAGE);clearApiCache()}
-export function logout(){clearKey();location.replace('giris.html')}
+export async function logout(){
+  clearKey();
+  try{const db=await authClient();await db.auth.signOut()}catch{}
+  location.replace('giris.html');
+}
 
 export async function verifyKey(){
-  const key=captureKey();
-  if(!key)return false;
-  const r=await fetch(FN+'gm-key-list',{headers:{'x-gm-key':key},cache:'no-store'});
-  if(!r.ok){if(r.status===403||r.status===404)clearKey();return false}
+  const headers=await accessHeaders();
+  if(!headers)return false;
+  const r=await fetch(FN+'gm-key-list',{headers,cache:'no-store'});
+  if(!r.ok){if('x-gm-key'in headers&&(r.status===403||r.status===404))clearKey();return false}
   return true;
 }
 
 export async function api(slug,body={}){
-  const key=captureKey();
-  if(!key){const e=new Error('GM özel bağlantısı gerekli.');e.code='NO_KEY';throw e}
+  const auth=await accessHeaders();
+  if(!auth){const e=new Error('GM girişi gerekli.');e.code='NO_KEY';throw e}
   const readOnly=isReadOnly(slug,body);
   const cacheKey=readOnly?makeCacheKey(slug,body):'';
   if(readOnly){
@@ -84,9 +108,9 @@ export async function api(slug,body={}){
     if(inFlight.has(cacheKey))return inFlight.get(cacheKey);
   }
   const run=(async()=>{
-    const r=await fetch(FN+slug,{method:'POST',headers:{'Content-Type':'application/json','x-gm-key':key},body:JSON.stringify(body),cache:'no-store',keepalive:true});
+    const r=await fetch(FN+slug,{method:'POST',headers:{'Content-Type':'application/json',...auth},body:JSON.stringify(body),cache:'no-store',keepalive:true});
     let data={};try{data=await r.json()}catch{}
-    if(r.status===403||r.status===404){clearKey();const e=new Error('GM özel bağlantısı geçersiz.');e.code='BAD_KEY';throw e}
+    if(r.status===403||r.status===404){if('x-gm-key'in auth)clearKey();const e=new Error('GM oturumu veya yetkisi geçersiz.');e.code='BAD_KEY';throw e}
     if(!r.ok)throw new Error(data.error||'GM işlemi başarısız.')
     if(readOnly)writeCache(cacheKey,data);else clearApiCache();
     return data;
@@ -95,7 +119,7 @@ export async function api(slug,body={}){
   try{return await run}finally{if(readOnly)inFlight.delete(cacheKey)}
 }
 
-export function requireKey(){
-  if(!captureKey()){location.replace('giris.html');return false}
+export async function requireKey(){
+  if(!await accessHeaders()){location.replace('giris.html');return false}
   return true;
 }

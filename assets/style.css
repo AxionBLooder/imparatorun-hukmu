@@ -9,3 +9,27 @@
 @media(max-width:1050px){.portal-grid{grid-template-columns:1fr 1fr}.resource-duo,.workbench-grid,.player-top-grid{grid-template-columns:1fr}.span-2{grid-column:auto}.inventory-workbench{grid-template-columns:260px 1fr}.player-dashboard{grid-template-columns:1fr 1fr}.player-dashboard>.panel:first-child{grid-column:1/-1}.identity-grid{grid-template-columns:1fr 1fr}.horizontal-on-wide{grid-template-columns:1fr 1fr}.compact-head{align-items:flex-start;flex-direction:column}.compact-head .status{width:100%}}
 @media(max-width:900px){.form-grid,.stat-grid,.inline-stats{grid-template-columns:1fr 1fr}.hero-card{padding:30px}.topbar .shell{align-items:flex-start;flex-direction:column}.split,.inventory-workbench{grid-template-columns:1fr}.tall-list{max-height:260px}.player-dashboard{grid-template-columns:1fr}.player-dashboard>.panel:first-child{grid-column:auto}.compact-player-stats{grid-template-columns:repeat(5,1fr)}}
 @media(max-width:650px){body{font-size:15px}.portal-grid{grid-template-columns:1fr}.form-grid,.stat-grid,.inline-stats,.identity-grid,.mini-info-grid{grid-template-columns:1fr}.shell{width:min(100% - 20px,1280px)}.page-head h1,.compact-head h1{font-size:34px}.resource-row{grid-template-columns:1fr}.counter{justify-content:flex-start}.horizontal-on-wide{grid-template-columns:1fr}.inline-add{grid-template-columns:1fr 90px}.inline-add .btn{grid-column:1/-1}.compact-player-stats{grid-template-columns:repeat(5,minmax(54px,1fr));overflow-x:auto}.compact-player-stats .stat{padding:9px;min-height:76px}.compact-player-stats .stat span{font-size:22px}.player-note{grid-template-columns:1fr}.glyph-mode-tabs{flex-wrap:wrap}.glyph-mode{min-width:100px}.workshop-link{align-items:flex-start;flex-direction:column}}
+
+/* Açık ön paneller, koyu FRP sahnesi — 2026 tema güncellemesi. */
+:root{--panel:#263440;--panel2:#354553;--text:#f5f2e9;--muted:#c1c9d0;--gold:#f1cb82;--line:#506273}
+body{background:radial-gradient(circle at 50% -12%,#29232a 0%,#10151d 36%,#080b11 100%)}
+.hero-card,.panel{background:linear-gradient(145deg,rgba(48,63,77,.98),rgba(32,43,56,.98));border-color:var(--line);box-shadow:0 20px 65px rgba(0,0,0,.3)}
+.portal{background:linear-gradient(155deg,#374956,#273643);border-color:#53677a;box-shadow:0 8px 24px rgba(0,0,0,.13)}
+.portal:hover{background:linear-gradient(155deg,#445a69,#304251);border-color:var(--gold);box-shadow:0 13px 30px rgba(0,0,0,.23)}
+.lead,.topbar .nav a,.topbar .nav button{color:#deddd5}
+.topbar{background:rgba(15,21,30,.96);border-color:#344657}
+.nav a.active,.nav a:hover,.nav button:hover{background:#344455;color:#fff}
+.field input,.field select,.field textarea,.status,.placeholder,.stat,.character-row,.glyph-mode,.note-box{background:#273745;color:var(--text);border-color:#657584}
+.field input::placeholder,.field textarea::placeholder{color:#b1beca;opacity:1}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(241,203,130,.12)}
+.stat strong,.field label{color:#ffdb97}
+.character-row:hover{background:#354859}.character-row.active{background:#44503e;border-color:var(--gold)}
+.pill{background:#344657;color:#f0e6d0;border-color:#697787}
+.btn{background:#71522a;color:#fff4dc;border-color:#b98b4d}
+.btn:hover{filter:brightness(1.12)}
+.btn.secondary,.counter button{background:#374a5b;color:#f4f2ee;border-color:#697b8c}
+.btn.danger{background:#622e39;color:#ffe7eb;border-color:#a45c6c}
+.status[data-type="error"]{background:#49313b;border-color:#af6774;color:#ffe1e7}
+.glyph-mode.active{background:#625035;color:#ffe4ad;border-color:var(--gold)}
+.section-divider{background:#647584}.resource-row{border-color:#596b7b}
+.scroll-list::-webkit-scrollbar-thumb{background:#607385}
