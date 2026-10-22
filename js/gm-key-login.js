@@ -1,4 +1,4 @@
-import {authClient,verifyKey} from './gm-key-client.js';
+import {authClient,verifyKey} from './gm-key-client.js?v=gm-email-20261023';
 
 const status=document.querySelector('#statusMessage');
 const openBtn=document.querySelector('#openSavedGm');
